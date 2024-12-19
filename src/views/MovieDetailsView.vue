@@ -13,6 +13,10 @@ const props = defineProps({
 onMounted(async () => {
     await movieStore.getMovieDetail(props.movieId);
 });
+
+
+
+
 </script>
 
 <template>
@@ -26,20 +30,33 @@ onMounted(async () => {
         <div class="content">
             <div class="details">
                 <h1>{{ movieStore.currentMovie.title }}</h1>
-                <p><strong>Data de Lançamento:</strong> {{ movieStore.currentMovie.release_date }}</p>
+                <div class="data-e-genero">
+                    <p>{{ movieStore.currentMovie.release_date }}</p>
+                    <p>
+                        <span v-for="genre in movieStore.currentMovie.genres" :key="genre.id">
+                            {{ genre.name }}<span v-if="!$last">, </span>
+                        </span>
+                    </p>
+                    <p><strong>Classificação:</strong> {{ movieStore.currentMovie.certification || 'N/A' }}</p>
+
+                </div>
+
+
+                <div class="synopsis">
+                    <h2></h2>
+                    <p>{{ movieStore.currentMovie.overview }}</p>
+                </div>
+
                 <p><strong>Duração:</strong> {{ movieStore.currentMovie.runtime }} minutos</p>
-                <p><strong>Receita:</strong> ${{ movieStore.currentMovie.revenue }}</p>
-                <p><strong>País(es) de Produção:</strong> 
-   <span v-for="country in movieStore.currentMovie.production_countries" :key="country.iso_3166_1">
-       {{ country.name }}<span v-if="!$last">, </span>
-   </span>
-</p>
-<p><strong>Classificação:</strong> {{ movieStore.currentMovie.certification || 'N/A' }}</p>
-<p>
-   <a :href="`https://www.youtube.com/watch?v=${movieStore.currentMovie.videos.results[0]?.key}`" target="_blank">
-      Assistir ao Trailer
-   </a>
-</p>
+                <p><strong>Receita:</strong> ${{ movieStore.currentMoSinopsevie.revenue }}</p>
+                <p><strong>País(es) de Produção:</strong>
+                    <span v-for="country in movieStore.currentMovie.production_countries" :key="country.iso_3166_1">
+                        {{ country.name }}<span v-if="!$last">, </span>
+                    </span>
+                </p>
+                <p><strong>Classificação:</strong> {{ movieStore.currentMovie.certification || 'N/A' }}</p>
+
+
 
 
 
@@ -58,21 +75,32 @@ onMounted(async () => {
 </template>
 
 <style scoped>
+.synopsis{
+    margin-bottom: 5vh;
+}
+.data-e-genero{
+    display: flex;
+    margin-top: 4vh;
+    margin-bottom: 8vh;
+    width: 20vw;
+    justify-content: space-around;
+}
 .content {
     margin-top: 25vh;
     display: flex;
-    width: 45vw;
+    width: 40vw;
 }
 
 .details h1 {
     font-family: 'Quicksand', sans-serif;
-    font-size: 3em;
+    font-size: 2.3em;
 }
 
 .main {
     position: relative;
     width: auto;
     height: 100vh;
+    width: 100%;
     overflow: hidden;
     color: white;
     font-family: Arial, sans-serif;
@@ -87,11 +115,13 @@ onMounted(async () => {
     height: 100%;
     z-index: -2;
     overflow: hidden;
-
+    display: flex;
 }
 
 .background img {
-    filter: brightness(0.5);
+    width: 100%;
+    object-fit: cover;
+    filter: brightness(.6);
 }
 
 .gradiente {
