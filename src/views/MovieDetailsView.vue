@@ -32,14 +32,8 @@ onMounted(async () => {
                 <h1>{{ movieStore.currentMovie.title }}</h1>
 
                 <div class="data-e-genero">
-
                     <p><strong>Data de estreia: </strong>{{ formatDate(movieStore.currentMovie.release_date) }}</p>
-
-
                     <p><strong>Avaliação:</strong> {{ movieStore.currentMovie.vote_average }} / 10</p>
-
-                    
-
                 </div>
 
                 <div class="synopsis">
@@ -101,10 +95,11 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.content{
+.content {
     padding-left: 10vw;
     padding-right: 10vw;
 }
+
 .fundo {
     position: absolute;
     z-index: -1;
@@ -112,7 +107,7 @@ onMounted(async () => {
     width: 100%;
     filter: opacity(.6);
     background: rgb(46, 42, 42);
-    background: linear-gradient(  rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.76) 78%, rgb(0, 0, 0) 100%);
+    background: linear-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.76) 78%, rgb(0, 0, 0) 100%);
 }
 
 .sinopse {
@@ -128,12 +123,15 @@ onMounted(async () => {
     justify-content: space-between;
     margin-bottom: 5vh;
 }
-.esquerda{
+
+.esquerda {
     width: 20vw;
 }
-.esquerda p{
+
+.esquerda p {
     font-size: 1vw;
 }
+
 .direita p {
     font-size: 1vw;
 }
@@ -146,7 +144,7 @@ onMounted(async () => {
 
 .synopsis {
     width: 60vw;
-
+    margin-bottom: 2vh;
 }
 
 button {
@@ -168,10 +166,6 @@ button:hover {
 button p {
     font-size: 1vw;
     font-weight: 600;
-}
-
-.synopsis {
-    margin-bottom: 2vh;
 }
 
 .data-e-genero {
