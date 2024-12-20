@@ -6,6 +6,7 @@
       <router-link to="/filmes">Filmes</router-link>
       <router-link to="/tv">Programas de TV</router-link>
     </nav>
+    
   </header>
   <main>
     <router-view />
@@ -15,7 +16,7 @@
 h1{
   margin-bottom: 0;
   font-size: 2rem;
-}
+
 header {
   display: flex;
   flex-direction: row;
