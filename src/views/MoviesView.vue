@@ -36,8 +36,8 @@ function openMovie(movieId) {
 }
 </script>
 <template>
-  <h1>Filmes</h1>
-  <ul class="genre-list">
+  <div class="fundo">
+    <ul class="genre-list">
     <li v-for="genre in genreStore.genres" :key="genre.id" @click="listMovies(genre.id)" class="genre-item"
       :class="{ active: genre.id === genreStore.currentGenreId }">
       {{ genre.name }}
@@ -48,8 +48,11 @@ function openMovie(movieId) {
 
 
     <div v-for="movie in movies" :key="movie.id" class="movie-card">
-      <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" :alt="movie.title"
+      <div class="img-filme">
+        <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" :alt="movie.title"
         @click="openMovie(movie.id)" />
+      </div>
+      
       <div class="movie-details">
         <p class="movie-title">{{ movie.title }}</p>
         <!--<p class="movie-release-date">{{ formatDate(movie.release_date) }}</p>-->
@@ -60,32 +63,56 @@ function openMovie(movieId) {
 
 
   </div>
+  </div>
+  
 
 </template>
 <style scoped>
-template{
-  background-attachment: red;
-}
-.genre-list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  list-style: none;
-  margin-bottom: 2rem;
-}
 
+.fundo{
+  background-color: #1a1a1a;
+}
 .genre-item {
-  background-color: #387250;
+  background-color: transparent;
   border-radius: 1rem;
   padding: 0.5rem 1rem;
   color: #fff;
+  text-decoration: none; 
+  position: relative;    
+  transition: all 0.2s;
+  display: flex;
+  flex-direction:row ;
+}
+
+.genre-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;           /* Espessura do sublinhado */
+  background-color: #fff; /* Cor do sublinhado */
+  transition: width 0.3s ease-in-out;
+}
+
+.genre-item:hover::after {
+  width: 100%;           /* Faz o sublinhado aparecer */
 }
 
 .genre-item:hover {
   cursor: pointer;
-  background-color: #4e9e5f;
-  box-shadow: 0 0 0.5rem #387250;
+}
+
+.genre-item {
+  background-color: transparent;
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  transition: .2s;
+}
+
+.genre-item:hover {
+  cursor: pointer;
 }
 
 .movie-list {
@@ -94,22 +121,29 @@ template{
   gap: 1rem;
   display: flex;
   justify-content: space-between;
-
+  padding-left: 7vw;
+  padding-right: 7vw;
+  text-align: center
 }
-
+.img-filme{
+  width: 100%;
+  height: 36vh;
+}
 .movie-card {
-  width: 15rem;
-  height: 30rem;
+  width: 13vw;
   border-radius: 0.5rem;
   overflow: hidden;
-  box-shadow: 0 0 0.5rem #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.movie-card img {
+.img-filme img {
   width: 100%;
-  height: 20rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem #000;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 0 1.5rem  rgb(19, 19, 19);
 }
 
 .movie-details {
@@ -117,10 +151,12 @@ template{
 }
 
 .movie-title {
+  margin-top: 1.5vh;
   font-size: 1.1rem;
-  font-weight: bold;
+  font-weight: 400;
   line-height: 1.3rem;
   height: 3.2rem;
+  color: rgb(139, 139, 139);
 }
 
 .movie-genres {
@@ -148,7 +184,7 @@ template{
 }
 
 .active {
-  background-color: #67b086;
+  background-color: transparent;
   font-weight: bolder;
 }
 

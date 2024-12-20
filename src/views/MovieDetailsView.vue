@@ -128,8 +128,12 @@ onMounted(async () => {
     justify-content: space-between;
     margin-bottom: 5vh;
 }
-
-.esquerda,
+.esquerda{
+    width: 20vw;
+}
+.esquerda p{
+    font-size: 1vw;
+}
 .direita p {
     font-size: 1vw;
 }

@@ -5,12 +5,17 @@
       <router-link to="/filmes">Filmes</router-link>
       <router-link to="/tv">Programas de TV</router-link>
     </nav>
+    
   </header>
   <main>
     <router-view />
   </main>
 </template>
 <style scoped>
+body{
+  background-color: #1a1a1a;
+
+}
 header {
   height: 3rem;
   display: flex;
