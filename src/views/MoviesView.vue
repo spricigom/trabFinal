@@ -45,27 +45,27 @@ function openMovie(movieId) {
   </ul>
   <loading v-model:active="isLoading" is-full-page />
   <div class="movie-list">
-    <div v-for="movie in movies" :key="movie.id" class="movie-card">
 
+
+    <div v-for="movie in movies" :key="movie.id" class="movie-card">
       <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" :alt="movie.title"
         @click="openMovie(movie.id)" />
       <div class="movie-details">
         <p class="movie-title">{{ movie.title }}</p>
-        <p class="movie-release-date">{{ formatDate(movie.release_date) }}</p>
-        <p class="movie-genres">
-
-          <span v-for="genre_id in movie.genre_ids" :key="genre_id" @click="listMovies(genre_id)"
-            :class="{ active: genre_id === genreStore.currentGenreId }">
-            {{ genreStore.getGenreName(genre_id) }}
-          </span>
-
-        </p>
+        <!--<p class="movie-release-date">{{ formatDate(movie.release_date) }}</p>-->
+        
       </div>
     </div>
+
+
+
   </div>
 
 </template>
 <style scoped>
+template{
+  background-attachment: red;
+}
 .genre-list {
   display: flex;
   justify-content: center;
@@ -92,6 +92,9 @@ function openMovie(movieId) {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+  display: flex;
+  justify-content: space-between;
+
 }
 
 .movie-card {
