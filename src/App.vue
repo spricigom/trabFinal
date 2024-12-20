@@ -16,7 +16,7 @@
 h1{
   margin-bottom: 0;
   font-size: 2rem;
-
+}
 header {
   display: flex;
   flex-direction: row;

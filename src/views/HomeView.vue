@@ -9,6 +9,7 @@ const usuario = reactive({
 })
 
 function enviarLogin() {
+  let error = false
   if (usuario.email == '') {
     alert("Faltou o email")
     error = true

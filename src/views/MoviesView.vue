@@ -8,7 +8,6 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const genreStore = useGenreStore();
 const isLoading = ref(false);
-const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
 
 
 onMounted(async () => {
@@ -76,7 +75,7 @@ function openMovie(movieId) {
   background-color: transparent;
   border-radius: 1rem;
   padding: 0.5rem 1rem;
-  color: #fff;
+  color: #c5c5c5;
   text-decoration: none; 
   position: relative;    
   transition: all 0.2s;
@@ -89,13 +88,13 @@ function openMovie(movieId) {
   bottom: 0;
   left: 0;
   width: 0;
-  height: 2px;           /* Espessura do sublinhado */
-  background-color: #fff; /* Cor do sublinhado */
+  height: 2px;           
+  background-color: #fff; 
   transition: width 0.3s ease-in-out;
 }
 
 .genre-item:hover::after {
-  width: 100%;           /* Faz o sublinhado aparecer */
+  width: 100%;       
 }
 
 
@@ -125,10 +124,7 @@ function openMovie(movieId) {
   display: flex;
   flex-direction:row ;
 }
-.img-filme{
-  width: 100%;
-  height: 36vh;
-}
+
 .movie-card {
   width: 13vw;
   border-radius: 0.5rem;
@@ -136,8 +132,16 @@ function openMovie(movieId) {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+  transition: .2s ease-in-out;
 
+}
+.img-filme{
+  width: 100%;
+  height: 36vh;
+}
+.movie-card:hover{
+  transform: scale(1.1);
+}
 .img-filme img {
   width: 100%;
   height: 100%;
@@ -184,8 +188,8 @@ function openMovie(movieId) {
 }
 
 .active {
-  background-color: transparent;
   font-weight: bolder;
+  color: #fff;
 }
 
 .movie-genres span.active {

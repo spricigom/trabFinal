@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, onMounted, computed } from 'vue';
+import { defineProps, onMounted } from 'vue';
 import { useMovieStore } from '@/stores/movie';
 const movieStore = useMovieStore();
 

@@ -2,12 +2,11 @@
 import { ref, onMounted } from 'vue';
 import api from '@/plugins/axios';
 import Loading from 'vue-loading-overlay';
-import { useGenreStore } from '@/stores/genre';import { useRouter } from 'vue-router'
+import { useGenreStore } from '@/stores/genre'; import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const genreStore = useGenreStore();
 const isLoading = ref(false);
-const formatDate = (date) => new Date(date).toLocaleDateString('pt-BR');
 
 onMounted(async () => {
     isLoading.value = true;
@@ -30,12 +29,11 @@ const listTvs = async (genreId) => {
 };
 
 function openTv(TvId) {
-  router.push({ name: 'TvDetails', params: { TvId } });
+    router.push({ name: 'TvDetails', params: { TvId } });
 }
 </script>
 
 <template>
-    <h1>Programas de TV</h1>
     <ul class="genre-list">
         <li v-for="genre in genreStore.genres" :key="genre.id" @click="listTvs(genre.id)" class="genre-item"
             :class="{ active: genre.id === genreStore.currentGenreId }">
@@ -45,18 +43,12 @@ function openTv(TvId) {
     <loading v-model:active="isLoading" is-full-page />
     <div class="tv-list">
         <div v-for="tv in Tvs" :key="tv.id" class="tv-card">
+            <div class="img-tv">
+                <img :src="`https://image.tmdb.org/t/p/w500${tv.poster_path}`" :alt="tv.title" @click="openTv(tv.id)" />
+            </div>
 
-            <img :src="`https://image.tmdb.org/t/p/w500${tv.poster_path}`" :alt="tv.title"
-            @click="openTv(tv.id)" />
             <div class="tv-details">
                 <p class="tv-title">{{ tv.original_name }}</p>
-                <p class="movie-release-date">{{ formatDate(tv.release_date) }}</p>
-                <p class="movie-genres">
-                    <span v-for="genre_id in tv.genre_ids" :key="genre_id" @click="listTvs(genre_id)"
-                        :class="{ active: genre_id === genreStore.currentGenreId }">
-                        {{ genreStore.getGenreName(genre_id) }}
-                    </span>
-                </p>
             </div>
 
         </div>
@@ -64,50 +56,83 @@ function openTv(TvId) {
 </template>
 
 <style scoped>
-.genre-list {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    list-style: none;
-    padding: 0;
-}
-
 .genre-item {
-    background-color: #5d6424;
+    background-color: transparent;
     border-radius: 1rem;
     padding: 0.5rem 1rem;
-    align-self: center;
-    color: #fff;
-    display: flex;
-    justify-content: center;
+    color: #c5c5c5;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s;
+    cursor: pointer;
 }
 
-.genre-item:hover {
-    cursor: pointer;
-    background-color: #7d8a2e;
-    box-shadow: 0 0 0.5rem #5d6424;
+.genre-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #fff;
+    transition: width 0.3s ease-in-out;
+}
+
+.genre-item:hover::after {
+    width: 100%;
+}
+
+
+.genre-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding-left: 15vw;
+    padding-right: 15vw;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    margin-top: 2vh;
+    margin-bottom: 5vh;
 }
 
 .tv-list {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 7vw;
+    padding-right: 7vw;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
 }
 
 .tv-card {
-    width: 15rem;
-    height: 30rem;
-    border-radius: 0.5rem;
-    overflow: hidden;
-    box-shadow: 0 0 0.5rem #000;
+    width: 13vw;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: .2s ease-in-out;
 }
-
-.tv-card img {
+.tv-card:hover{
+    transform: scale(1.1);
+}
+.img-tv{
     width: 100%;
-    height: 20rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem #000;
+    height: 36vh;
+}
+.img-tv img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: 0 0 1.5rem  rgb(19, 19, 19);
 }
 
 .tv-details {
@@ -115,12 +140,13 @@ function openTv(TvId) {
 }
 
 .tv-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-    line-height: 1.3rem;
-    height: 3.2rem;
+  margin-top: 1.5vh;
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.3rem;
+  height: 3.2rem;
+  color: rgb(139, 139, 139);
 }
-
 
 .movie-genres {
     display: flex;
@@ -142,12 +168,10 @@ function openTv(TvId) {
 
 .movie-genres span:hover {
     cursor: pointer;
-    background-color: #455a08;
-    box-shadow: 0 0 0.5rem #748708;
 }
 
 .active {
-    background-color: #67b086;
+    color: #fff;
     font-weight: bolder;
 }
 
