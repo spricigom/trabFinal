@@ -80,8 +80,7 @@ function openMovie(movieId) {
   text-decoration: none; 
   position: relative;    
   transition: all 0.2s;
-  display: flex;
-  flex-direction:row ;
+  cursor: pointer;
 }
 
 .genre-item::after {
@@ -99,22 +98,21 @@ function openMovie(movieId) {
   width: 100%;           /* Faz o sublinhado aparecer */
 }
 
-.genre-item:hover {
-  cursor: pointer;
-}
 
-.genre-item {
-  background-color: transparent;
-  border-radius: 1rem;
-  padding: 0.5rem 1rem;
-  color: #fff;
-  transition: .2s;
+.genre-list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding-left: 15vw;
+  padding-right: 15vw;
+  text-align: center;
+  display: flex;
+  flex-direction:row ;
+  list-style: none;
+  margin-top: 2vh;
+  margin-bottom: 5vh;
 }
-
-.genre-item:hover {
-  cursor: pointer;
-}
-
 .movie-list {
   display: flex;
   flex-wrap: wrap;
@@ -123,7 +121,9 @@ function openMovie(movieId) {
   justify-content: space-between;
   padding-left: 7vw;
   padding-right: 7vw;
-  text-align: center
+  text-align: center;
+  display: flex;
+  flex-direction:row ;
 }
 .img-filme{
   width: 100%;
